@@ -2,7 +2,7 @@
 
 namespace LaravelDoctrine\ACL\Mappings\Builders;
 
-use Doctrine\DBAL\Types\Type;
+use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping\Builder\ClassMetadataBuilder;
 use Doctrine\ORM\Mapping\Builder\FieldBuilder;
 use Doctrine\ORM\Mapping\ClassMetadata;
@@ -22,7 +22,7 @@ class JsonArrayBuilder implements Builder
             new ClassMetadataBuilder($metadata),
             [
                 'fieldName' => $property->getName(),
-                'type'      => Type::JSON_ARRAY,
+                'type'      => Types::JSON,
             ]
         );
 
