@@ -11,10 +11,7 @@ use LaravelDoctrine\ACL\Manager;
  */
 class PermissionManager extends Manager
 {
-    /**
-     * @return array
-     */
-    public function getPermissionsWithDotNotation()
+    public function getPermissionsWithDotNotation(): array
     {
         $permissions = $this->driver()->getAllPermissions();
 
@@ -25,13 +22,7 @@ class PermissionManager extends Manager
         return Arr::flatten($list);
     }
 
-    /**
-     * @param array|string $permissions
-     * @param string       $prepend
-     *
-     * @return array
-     */
-    protected function convertToDotArray($permissions, $prepend = '')
+    protected function convertToDotArray(string|array $permissions, string $prepend = ''): array
     {
         $list = [];
         if (is_array($permissions)) {
@@ -45,35 +36,22 @@ class PermissionManager extends Manager
         return $list;
     }
 
-    /**
-     * Get the default driver name.
-     * @return string
-     */
-    public function getDefaultDriver()
+    public function getDefaultDriver(): string
     {
         return $this->container->make('config')->get('acl.permissions.driver', 'config');
     }
 
-    /**
-     * @return string
-     */
-    public function getNamespace()
+    public function getNamespace(): string
     {
         return __NAMESPACE__;
     }
 
-    /**
-     * @return string
-     */
-    public function getClassSuffix()
+    public function getClassSuffix(): string
     {
         return 'PermissionDriver';
     }
 
-    /**
-     * @return bool
-     */
-    public function useDefaultPermissionEntity()
+    public function useDefaultPermissionEntity(): bool
     {
         if (!$this->needsDoctrine()) {
             return false;
@@ -85,10 +63,7 @@ class PermissionManager extends Manager
         return $entityFqn === Permission::class;
     }
 
-    /**
-     * @return bool
-     */
-    public function needsDoctrine()
+    public function needsDoctrine(): bool
     {
         return $this->getDefaultDriver() === 'doctrine';
     }
